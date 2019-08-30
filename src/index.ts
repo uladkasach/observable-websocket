@@ -41,6 +41,7 @@ export class ObservableWebsocket {
   }
   public async send({ data }: { data: any }) {
     if (!this.isOpen) await this.open(); // should open on send if not already open
+    this.logDebug({ message: `connection-send::${data}::${this.uri}` });
     this.openSocket!.send(data); // send the data
     if (!this.subscriberCount) await this.close(); // if no subscribers, then we should close after send
   }

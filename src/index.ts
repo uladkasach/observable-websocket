@@ -68,14 +68,14 @@ export class ObservableWebsocket {
   private async open() {
     this.requestedState = ObservableWebsocketRequestedState.OPEN;
     this.attemptOpenConnection({ connectionAttempt: 0 });
-    await waitUntil(() => this.isOpen, 10000, 100); // wait up to 10s for this to become open
+    await waitUntil(() => this.isOpen, 30000, 100); // wait up to 30s for this to become open
   }
 
   // to close: set requested state and trigger close on socket
   private async close() {
     this.requestedState = ObservableWebsocketRequestedState.CLOSED;
     if (this.openSocket) this.openSocket.close();
-    await waitUntil(() => !this.isOpen, 10000, 100); // wait up to 10s for this to become closed
+    await waitUntil(() => !this.isOpen, 30000, 100); // wait up to 30s for this to become closed
   }
 
   // to open a connection, do lots of things:
